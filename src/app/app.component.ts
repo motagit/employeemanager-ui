@@ -15,12 +15,14 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.getEmployees();
+
   }
 
   public getEmployees(): void {
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
         this.employees = response;
+        console.log(this.employees);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
