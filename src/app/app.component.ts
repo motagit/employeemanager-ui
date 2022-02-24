@@ -2,6 +2,7 @@ import { EmployeeService } from './employee.service';
 import { Employee } from './employee';
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -51,4 +52,18 @@ export class AppComponent implements OnInit{
     button.click();
     button.remove();
   }
+
+  public onAddEmployee(addForm: NgForm): void {
+    document.getElementById('add-employee-form')?.click();
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
 }
